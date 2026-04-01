@@ -1,0 +1,148 @@
+name: Autograding Tests
+
+on:
+  - push
+  - workflow_dispatch
+
+permissions:
+  actions: read
+  contents: read
+  checks: write
+
+jobs:
+  autograding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # ── Setup — Node.js para TypeScript ────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # ── Setup — Clojure / Leiningen ────────────────────────────────────────
+      - name: Setup Clojure
+        uses: DeLaGuardo/setup-clojure@13.4
+        with:
+          lein: latest
+
+      # ── Instalar dependencias TS ───────────────────────────────────────────
+      - name: Install TypeScript dependencies
+        run: cd typescript && npm install
+
+      # ── Pre-descargar dependencias Clojure ────────────────────────────────
+      - name: Download Clojure dependencies
+        run: cd clojure && lein deps
+
+      # ══ TYPESCRIPT ══════════════════════════════════════════════════════════
+
+      - name: TS-G1 — Funciones Puras
+        id: ts-g1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'TS-G1 Funciones Puras (TS-01 a TS-05)'
+          command: 'cd typescript && npx jest tests/g1 --no-coverage --forceExit 2>&1'
+          timeout: 5
+          max-score: 10
+
+      - name: TS-G2 — Inmutabilidad
+        id: ts-g2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'TS-G2 Inmutabilidad (TS-06 a TS-10)'
+          command: 'cd typescript && npx jest tests/g2 --no-coverage --forceExit 2>&1'
+          timeout: 5
+          max-score: 10
+
+      - name: TS-G3 — map / filter / reduce
+        id: ts-g3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'TS-G3 map/filter/reduce (TS-11 a TS-18)'
+          command: 'cd typescript && npx jest tests/g3 --no-coverage --forceExit 2>&1'
+          timeout: 5
+          max-score: 16
+
+      - name: TS-G4 — Composicion y HOF
+        id: ts-g4
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'TS-G4 Composicion y HOF (TS-19 a TS-22)'
+          command: 'cd typescript && npx jest tests/g4 --no-coverage --forceExit 2>&1'
+          timeout: 5
+          max-score: 8
+
+      - name: TS-G5 — Contraste Imperativo vs Funcional
+        id: ts-g5
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'TS-G5 Contraste Imperativo vs Funcional (TS-23 a TS-25)'
+          command: 'cd typescript && npx jest tests/g5 --no-coverage --forceExit 2>&1'
+          timeout: 5
+          max-score: 6
+
+      # ══ CLOJURE ═════════════════════════════════════════════════════════════
+
+      - name: CLJ-G1 — Funciones basicas y listas
+        id: clj-g1
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CLJ-G1 Funciones basicas (CLJ-01 a CLJ-05)'
+          command: 'cd clojure && lein test ejercicios.grupo1-test 2>&1'
+          timeout: 5
+          max-score: 10
+
+      - name: CLJ-G2 — map / filter / reduce en Clojure
+        id: clj-g2
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CLJ-G2 map/filter/reduce (CLJ-06 a CLJ-11)'
+          command: 'cd clojure && lein test ejercicios.grupo2-test 2>&1'
+          timeout: 5
+          max-score: 12
+
+      - name: CLJ-G3 — Funciones de Orden Superior
+        id: clj-g3
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CLJ-G3 HOF (CLJ-12 a CLJ-16)'
+          command: 'cd clojure && lein test ejercicios.grupo3-test 2>&1'
+          timeout: 5
+          max-score: 10
+
+      - name: CLJ-G4 — Recursion
+        id: clj-g4
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CLJ-G4 Recursion (CLJ-17 a CLJ-20)'
+          command: 'cd clojure && lein test ejercicios.grupo4-test 2>&1'
+          timeout: 5
+          max-score: 8
+
+      - name: CLJ-G5 — Colecciones y mapas
+        id: clj-g5
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: 'CLJ-G5 Colecciones (CLJ-21 a CLJ-25)'
+          command: 'cd clojure && lein test ejercicios.grupo5-test 2>&1'
+          timeout: 5
+          max-score: 10
+
+      # ── Reporter (SIEMPRE al final) ────────────────────────────────────────
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        env:
+          TS_G1_RESULTS: "${{ steps.ts-g1.outputs.result }}"
+          TS_G2_RESULTS: "${{ steps.ts-g2.outputs.result }}"
+          TS_G3_RESULTS: "${{ steps.ts-g3.outputs.result }}"
+          TS_G4_RESULTS: "${{ steps.ts-g4.outputs.result }}"
+          TS_G5_RESULTS: "${{ steps.ts-g5.outputs.result }}"
+          CLJ_G1_RESULTS: "${{ steps.clj-g1.outputs.result }}"
+          CLJ_G2_RESULTS: "${{ steps.clj-g2.outputs.result }}"
+          CLJ_G3_RESULTS: "${{ steps.clj-g3.outputs.result }}"
+          CLJ_G4_RESULTS: "${{ steps.clj-g4.outputs.result }}"
+          CLJ_G5_RESULTS: "${{ steps.clj-g5.outputs.result }}"
+        with:
+          runners: ts-g1,ts-g2,ts-g3,ts-g4,ts-g5,clj-g1,clj-g2,clj-g3,clj-g4,clj-g5

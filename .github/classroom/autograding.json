@@ -1,0 +1,104 @@
+{
+  "tests": [
+    {
+      "name": "TS-G1 — Funciones Puras (TS-01 a TS-05)",
+      "setup": "cd typescript && npm install",
+      "run": "cd typescript && npx jest tests/g1 --no-coverage --forceExit",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "TS-G2 — Inmutabilidad (TS-06 a TS-10)",
+      "setup": "",
+      "run": "cd typescript && npx jest tests/g2 --no-coverage --forceExit",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "TS-G3 — map/filter/reduce (TS-11 a TS-18)",
+      "setup": "",
+      "run": "cd typescript && npx jest tests/g3 --no-coverage --forceExit",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 16
+    },
+    {
+      "name": "TS-G4 — Composicion y HOF (TS-19 a TS-22)",
+      "setup": "",
+      "run": "cd typescript && npx jest tests/g4 --no-coverage --forceExit",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 8
+    },
+    {
+      "name": "TS-G5 — Contraste Imperativo vs Funcional (TS-23 a TS-25)",
+      "setup": "",
+      "run": "cd typescript && npx jest tests/g5 --no-coverage --forceExit",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 6
+    },
+    {
+      "name": "CLJ-G1 — Funciones basicas (CLJ-01 a CLJ-05)",
+      "setup": "cd clojure && lein deps",
+      "run": "cd clojure && lein test ejercicios.grupo1-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "CLJ-G2 — map/filter/reduce Clojure (CLJ-06 a CLJ-11)",
+      "setup": "",
+      "run": "cd clojure && lein test ejercicios.grupo2-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 12
+    },
+    {
+      "name": "CLJ-G3 — HOF (CLJ-12 a CLJ-16)",
+      "setup": "",
+      "run": "cd clojure && lein test ejercicios.grupo3-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    },
+    {
+      "name": "CLJ-G4 — Recursion (CLJ-17 a CLJ-20)",
+      "setup": "",
+      "run": "cd clojure && lein test ejercicios.grupo4-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 8
+    },
+    {
+      "name": "CLJ-G5 — Colecciones y mapas (CLJ-21 a CLJ-25)",
+      "setup": "",
+      "run": "cd clojure && lein test ejercicios.grupo5-test",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 5,
+      "points": 10
+    }
+  ]
+}

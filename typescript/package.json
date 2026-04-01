@@ -1,0 +1,20 @@
+{
+  "name": "tp03-funcional",
+  "version": "1.0.0",
+  "description": "TP 03 — Programación Funcional con TypeScript — Paradigmas 2026 UNTDF",
+  "scripts": {
+    "test": "jest --no-coverage --forceExit",
+    "test:g1": "jest tests/g1 --no-coverage --forceExit --verbose",
+    "test:g2": "jest tests/g2 --no-coverage --forceExit --verbose",
+    "test:g3": "jest tests/g3 --no-coverage --forceExit --verbose",
+    "test:g4": "jest tests/g4 --no-coverage --forceExit --verbose",
+    "test:g5": "jest tests/g5 --no-coverage --forceExit --verbose"
+  },
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  }
+}
