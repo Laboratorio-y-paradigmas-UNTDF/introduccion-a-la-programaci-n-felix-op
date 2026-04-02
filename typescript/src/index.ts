@@ -26,7 +26,7 @@
  *          calcularConImpuesto(99.99, 10) === 109.99
  */
 export function calcularConImpuesto(base: number, tasa: number): number {
-  throw new Error("No implementado");
+    return Math.round(base * (1 + tasa / 100) * 100) / 100;
 }
 
 /**
@@ -38,10 +38,13 @@ export function calcularConImpuesto(base: number, tasa: number): number {
  *          agruparPorParidad([-2, -1, 0]) → { pares:[-2, 0], impares:[-1] }
  */
 export function agruparPorParidad(nums: number[]): {
-  pares: number[];
-  impares: number[];
+    pares: number[];
+    impares: number[];
 } {
-  throw new Error("No implementado");
+    return {
+        pares: nums.filter((n) => n % 2 === 0),
+        impares: nums.filter((n) => n % 2 !== 0),
+    };
 }
 
 /**
@@ -54,8 +57,23 @@ export function agruparPorParidad(nums: number[]): {
  * Ejemplo: fibonacci(10) === 55
  */
 export function fibonacci(n: number): number {
-  throw new Error("No implementado");
+    return n === 0 ? 0 : n === 1 ? 1 : fibonacci(n - 1) + fibonacci(n - 2);
 }
+
+const REGLAS_PASSWORD = [
+    {
+        test: (p: string) => p.length >= 8,
+        msg: "Debe tener al menos 8 caracteres",
+    },
+    {
+        test: (p: string) => /[A-Z]/.test(p),
+        msg: "Debe contener al menos una letra mayúscula",
+    },
+    {
+        test: (p: string) => /\d/.test(p),
+        msg: "Debe contener al menos un dígito",
+    },
+];
 
 /**
  * TS-04: Valida una contraseña según tres reglas. PURA, sin I/O ni estado global.
@@ -72,10 +90,17 @@ export function fibonacci(n: number): number {
  *          validarContrasena("abc") → { valida: false, errores: ["Debe tener al menos 8 caracteres", "Debe contener al menos una letra mayúscula", "Debe contener al menos un dígito"] }
  */
 export function validarContrasena(pass: string): {
-  valida: boolean;
-  errores: string[];
+    valida: boolean;
+    errores: string[];
 } {
-  throw new Error("No implementado");
+    const errores = REGLAS_PASSWORD.filter((regla) => !regla.test(pass)).map(
+        (regla) => regla.msg,
+    );
+
+    return {
+        valida: errores.length === 0,
+        errores,
+    };
 }
 
 /**
@@ -87,11 +112,11 @@ export function validarContrasena(pass: string): {
  *          componerNombre("Grace", "Hopper")         === "Grace Hopper"
  */
 export function componerNombre(
-  nombre: string,
-  apellido: string,
-  titulo?: string
+    nombre: string,
+    apellido: string,
+    titulo?: string,
 ): string {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 // ─── GRUPO 2: Inmutabilidad ───────────────────────────────────────────────
@@ -104,7 +129,7 @@ export function componerNombre(
  *          El array original NO debe cambiar.
  */
 export function agregarElemento<T>(arr: readonly T[], elemento: T): T[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -116,7 +141,7 @@ export function agregarElemento<T>(arr: readonly T[], elemento: T): T[] {
  *          eliminarPorIndice([10,20,30], 99)   → [10,20,30]
  */
 export function eliminarPorIndice<T>(arr: readonly T[], indice: number): T[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -129,10 +154,10 @@ export function eliminarPorIndice<T>(arr: readonly T[], indice: number): T[] {
  *   prod.precio === 100  // no debe cambiar
  */
 export function actualizarPrecio(
-  producto: { nombre: string; precio: number; [key: string]: unknown },
-  nuevoPrecio: number
+    producto: { nombre: string; precio: number; [key: string]: unknown },
+    nuevoPrecio: number,
 ): { nombre: string; precio: number; [key: string]: unknown } {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -144,7 +169,7 @@ export function actualizarPrecio(
  *          El array original NO debe cambiar.
  */
 export function ordenarSinMutar(nums: readonly number[]): number[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -158,10 +183,10 @@ export function ordenarSinMutar(nums: readonly number[]): number[] {
  *   → [{nombre:"A", precio:90}, {nombre:"B", precio:180}]
  */
 export function aplicarDescuentoRegistros(
-  productos: readonly { nombre: string; precio: number }[],
-  porcentaje: number
+    productos: readonly { nombre: string; precio: number }[],
+    porcentaje: number,
 ): { nombre: string; precio: number }[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 // ─── GRUPO 3: map / filter / reduce ───────────────────────────────────────
@@ -173,7 +198,7 @@ export function aplicarDescuentoRegistros(
  * Ejemplo: soloMayusculas(["hola", "mundo"]) → ["HOLA", "MUNDO"]
  */
 export function soloMayusculas(nombres: string[]): string[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -185,10 +210,10 @@ export function soloMayusculas(nombres: string[]): string[] {
  *   → [{nombre:"A",precio:50}]
  */
 export function productosBaratos(
-  productos: { nombre: string; precio: number }[],
-  precioMax: number
+    productos: { nombre: string; precio: number }[],
+    precioMax: number,
 ): { nombre: string; precio: number }[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -199,7 +224,7 @@ export function productosBaratos(
  * Ejemplo: sumaTotal([1,2,3,4,5]) === 15
  */
 export function sumaTotal(nums: number[]): number {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -211,7 +236,7 @@ export function sumaTotal(nums: number[]): number {
  *          contarPalabras("") → {}
  */
 export function contarPalabras(texto: string): Record<string, number> {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -224,8 +249,11 @@ export function contarPalabras(texto: string): Record<string, number> {
  * Ejemplo: sumaFiltradosAlCuadrado([1,2,3,4,5], 2) === 4²+5² === 16+25 === 41
  *          sumaFiltradosAlCuadrado([1,2,3], 10) === 0  (ninguno supera umbral)
  */
-export function sumaFiltradosAlCuadrado(nums: number[], umbral: number): number {
-  throw new Error("No implementado");
+export function sumaFiltradosAlCuadrado(
+    nums: number[],
+    umbral: number,
+): number {
+    throw new Error("No implementado");
 }
 
 /**
@@ -238,9 +266,9 @@ export function sumaFiltradosAlCuadrado(nums: number[], umbral: number): number 
  *   === (8+6)/2 === 7
  */
 export function promedioAprobados(
-  estudiantes: { nombre: string; nota: number }[]
+    estudiantes: { nombre: string; nota: number }[],
 ): number {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -249,7 +277,7 @@ export function promedioAprobados(
  * SIN loops. SIN reduce manual de aplanamiento.
  */
 export function aplanarLista<T>(listas: T[][]): T[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -265,9 +293,9 @@ export function aplanarLista<T>(listas: T[][]): T[] {
  *   ]) === 350  (solo 200 y 150: ambos credito y > 100)
  */
 export function totalVentasCredito(
-  transacciones: { monto: number; tipo: "credito" | "debito" }[]
+    transacciones: { monto: number; tipo: "credito" | "debito" }[],
 ): number {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 // ─── GRUPO 4: Composición y HOF ────────────────────────────────────────────
@@ -282,7 +310,7 @@ export function totalVentasCredito(
  *   compose(inc, doble)(3) === 7  // doble(3)=6, luego inc(6)=7
  */
 export function compose<T>(f: (x: T) => T, g: (x: T) => T): (x: T) => T {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -298,7 +326,7 @@ export function compose<T>(f: (x: T) => T, g: (x: T) => T): (x: T) => T {
  *   proc(3) === 7
  */
 export function pipe<T>(...fns: Array<(x: T) => T>): (x: T) => T {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -312,7 +340,7 @@ export function pipe<T>(...fns: Array<(x: T) => T>): (x: T) => T {
  *   sumarCurried(10)(5) === 15
  */
 export function curry2<A, B, C>(fn: (a: A, b: B) => C): (a: A) => (b: B) => C {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -326,7 +354,7 @@ export function curry2<A, B, C>(fn: (a: A, b: B) => C): (a: A) => (b: B) => C {
  *   triplicar(7) === 21
  */
 export function partial<A, B, C>(fn: (a: A, b: B) => C, a: A): (b: B) => C {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 // ─── GRUPO 5: Contraste Imperativo vs Funcional ────────────────────────────
@@ -351,10 +379,12 @@ export function partial<A, B, C>(fn: (a: A, b: B) => C, a: A): (b: B) => C {
  *   procesarVentas([{monto:200,tipo:"online"},{monto:50,tipo:"local"},{monto:300,tipo:"online"}])
  *   → { total: 500, count: 2, promedio: 250 }
  */
-export function procesarVentas(
-  ventas: { monto: number; tipo: string }[]
-): { total: number; count: number; promedio: number } {
-  throw new Error("No implementado");
+export function procesarVentas(ventas: { monto: number; tipo: string }[]): {
+    total: number;
+    count: number;
+    promedio: number;
+} {
+    throw new Error("No implementado");
 }
 
 /**
@@ -371,13 +401,13 @@ export function procesarVentas(
  *   (sorted: [1,1,2,3,4,5,6,9] → mediana = (3+4)/2 = 3.5)
  */
 export function estadisticasArray(nums: number[]): {
-  min: number;
-  max: number;
-  sum: number;
-  promedio: number;
-  mediana: number;
+    min: number;
+    max: number;
+    sum: number;
+    promedio: number;
+    mediana: number;
 } {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
 
 /**
@@ -406,7 +436,7 @@ export function estadisticasArray(nums: number[]): {
  *     ]
  */
 export function transformarDatos(
-  registros: { nombre: string; ventas: number[]; activo: boolean }[]
+    registros: { nombre: string; ventas: number[]; activo: boolean }[],
 ): { nombre: string; promedio: number }[] {
-  throw new Error("No implementado");
+    throw new Error("No implementado");
 }
