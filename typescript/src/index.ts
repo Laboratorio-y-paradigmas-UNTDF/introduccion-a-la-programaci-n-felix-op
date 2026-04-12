@@ -13,6 +13,8 @@
 // ✓ Producir NUEVAS colecciones, no modificar las recibidas
 // ============================================================
 
+import { promedio, promedioEnteros, redondear, sumar, sumarEnteros } from "./utilidades";
+
 // ─── GRUPO 1: Funciones Puras ─────────────────────────────────────────────
 
 /**
@@ -335,7 +337,7 @@ export function totalVentasCredito(
  *   compose(inc, doble)(3) === 7  // doble(3)=6, luego inc(6)=7
  */
 export function compose<T>(f: (x: T) => T, g: (x: T) => T): (x: T) => T {
-    throw new Error("No implementado");
+    return (x) => f(g(x));
 }
 
 /**
@@ -351,7 +353,7 @@ export function compose<T>(f: (x: T) => T, g: (x: T) => T): (x: T) => T {
  *   proc(3) === 7
  */
 export function pipe<T>(...fns: Array<(x: T) => T>): (x: T) => T {
-    throw new Error("No implementado");
+    return (x) => fns.reduce((prev, fn) => fn(prev), x);
 }
 
 /**
@@ -365,7 +367,7 @@ export function pipe<T>(...fns: Array<(x: T) => T>): (x: T) => T {
  *   sumarCurried(10)(5) === 15
  */
 export function curry2<A, B, C>(fn: (a: A, b: B) => C): (a: A) => (b: B) => C {
-    throw new Error("No implementado");
+    return (a) => (b) => fn(a, b);
 }
 
 /**
@@ -379,7 +381,7 @@ export function curry2<A, B, C>(fn: (a: A, b: B) => C): (a: A) => (b: B) => C {
  *   triplicar(7) === 21
  */
 export function partial<A, B, C>(fn: (a: A, b: B) => C, a: A): (b: B) => C {
-    throw new Error("No implementado");
+    return (b) => fn(a, b);
 }
 
 // ─── GRUPO 5: Contraste Imperativo vs Funcional ────────────────────────────
@@ -409,7 +411,12 @@ export function procesarVentas(ventas: { monto: number; tipo: string }[]): {
     count: number;
     promedio: number;
 } {
-    throw new Error("No implementado");
+    const mayores100 = ventas.filter((venta) => venta.monto>100);
+    return {
+        total: sumar(mayores100, (venta) => venta.monto),
+        count: mayores100.length,
+        promedio: promedio(mayores100, (venta) => venta.monto)
+    }
 }
 
 /**
@@ -432,7 +439,17 @@ export function estadisticasArray(nums: number[]): {
     promedio: number;
     mediana: number;
 } {
-    throw new Error("No implementado");
+    const count = nums.length;
+    const posMediana = Math.ceil(count / 2);
+    const esPar = count % 2 === 0;
+    const ordenados = [...nums].sort();
+    return {
+        min: (count===0) ? 0 : Math.min(...nums),
+        max: (count===0) ? 0 : Math.max(...nums),
+        sum: sumarEnteros(nums),
+        promedio: promedioEnteros(nums),
+        mediana: (count===0) ? 0 : esPar ? (ordenados[posMediana-1] + ordenados[posMediana]) / 2 : ordenados[posMediana-1],
+    }
 }
 
 /**
@@ -463,5 +480,13 @@ export function estadisticasArray(nums: number[]): {
 export function transformarDatos(
     registros: { nombre: string; ventas: number[]; activo: boolean }[],
 ): { nombre: string; promedio: number }[] {
-    throw new Error("No implementado");
+    return (
+        registros
+            .filter((registro) => registro.activo)
+            .map((registro) => ({
+                nombre: registro.nombre,
+                promedio: redondear(promedioEnteros(registro.ventas), 2),
+            }))
+            .sort((a, b) => b.promedio - a.promedio)
+    )
 }
