@@ -134,15 +134,15 @@ jobs:
       - name: Autograding Reporter
         uses: classroom-resources/autograding-grading-reporter@v1
         env:
-          TS_G1_RESULTS: "${{ steps.tsg1.outputs.result }}"
-          TS_G2_RESULTS: "${{ steps.tsg2.outputs.result }}"
-          TS_G3_RESULTS: "${{ steps.tsg3.outputs.result }}"
-          TS_G4_RESULTS: "${{ steps.tsg4.outputs.result }}"
-          TS_G5_RESULTS: "${{ steps.tsg5.outputs.result }}"
-          CLJ_G1_RESULTS: "${{ steps.cljg1.outputs.result }}"
-          CLJ_G2_RESULTS: "${{ steps.cljg2.outputs.result }}"
-          CLJ_G3_RESULTS: "${{ steps.cljg3.outputs.result }}"
-          CLJ_G4_RESULTS: "${{ steps.cljg4.outputs.result }}"
-          CLJ_G5_RESULTS: "${{ steps.cljg5.outputs.result }}"
+          TSG1_RESULTS: "${{ steps.tsg1.outputs.result }}"
+          TSG2_RESULTS: "${{ steps.tsg2.outputs.result }}"
+          TSG3_RESULTS: "${{ steps.tsg3.outputs.result }}"
+          TSG4_RESULTS: "${{ steps.tsg4.outputs.result }}"
+          TSG5_RESULTS: "${{ steps.tsg5.outputs.result }}"
+          CLJG1_RESULTS: "${{ steps.cljg1.outputs.result }}"
+          CLJG2_RESULTS: "${{ steps.cljg2.outputs.result }}"
+          CLJG3_RESULTS: "${{ steps.cljg3.outputs.result }}"
+          CLJG4_RESULTS: "${{ steps.cljg4.outputs.result }}"
+          CLJG5_RESULTS: "${{ steps.cljg5.outputs.result }}"
         with:
           runners: tsg1,tsg2,tsg3,tsg4,tsg5,cljg1,cljg2,cljg3,cljg4,cljg5
